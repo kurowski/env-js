@@ -25,7 +25,9 @@ ant concat
 if [ ! -d "$PROTOTYPE_DIR" ]; then
   git clone git://github.com/sstephenson/prototype.git $PROTOTYPE_DIR
   cd $PROTOTYPE_DIR
-  rake test #prepares tests
+  git submodule init
+  git submodule update
+  rake test:build #prepares tests
   cd -
 fi
 
@@ -33,16 +35,13 @@ cp dist/env.rhino.js $PROTOTYPE_DIR/test/env.js
 cp rhino/js.jar $PROTOTYPE_DIR/test/js.jar
 cp bin/prototype-$VERSION-test.js $PROTOTYPE_DIR/test/test.js
 
-cd $PROTOTYPE_DIR
-git submodule init
-git submodule update
+cd $PROTOTYPE_DIR/test
 
-
-#if [ $DEBUG -eq 1 ]; then
-#    echo 'running with rhino debugger'
-#    java -cp js.jar org.mozilla.javascript.tools.debugger.Main test.js;
-#else
-#    echo 'running with rhino'
-#    java -jar js.jar -w -debug test.js;
-#fi
+if [ $DEBUG -eq 1 ]; then
+    echo 'running with rhino debugger'
+    java -cp js.jar org.mozilla.javascript.tools.debugger.Main test.js;
+else
+    echo 'running with rhino'
+    java -jar js.jar -w -debug test.js;
+fi
 

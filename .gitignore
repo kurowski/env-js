@@ -1,1 +1,2 @@
 dist/env.*.js
+test/vendor/Prototype/[0-9]*

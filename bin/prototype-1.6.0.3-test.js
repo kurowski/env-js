@@ -1,34 +1,44 @@
 //debugger;
-load("build/runtest/env.js");
+load("env.js");
 
 (function($env){
-    
-    $env("test/index.html", {
-        //let it load the script from the html
-        scriptTypes: {
-            "text/javascript"   :true
-        },
-        afterload:{
-            'qunit/testrunner.js': function(){
-                //hook into qunit.log
-                var count = 0;
-                QUnit.log = function(result, message){
-                    $env.log('(' + (count++) + ')[' + 
-                        ((!!result) ? 'PASS' : 'FAIL') + '] ' + message);
-                };
-                //hook into qunit.done
-                QUnit.done = function(pass, fail){
-                    $env.warn('Writing Results to File');
-                    jQuery('script').each(function(){
-                        this.type = 'text/envjs';
-                    });
-                    $env.writeToFile(
-                        document.documentElement.xml, 
-                        $env.location('jqenv.html')
-                    );
-                };
-            }
+
+  var run = function(file) {
+    $env(file, {
+      //let it load the script from the html
+      scriptTypes: {
+        "text/javascript": true
+      },
+      afterload:{
+        'assets/unittest.js': function(){
+          // override some unittest.js methods in order to capture test results
+          Test.Unit.Logger.prototype.start = function(testName) {
+            $env.log(testName + ':');
+          };
+          Test.Unit.Logger.prototype.finish = function(status, summary) {
+            $env.log('[' + status + '] ' + summary);
+          };
+          Test.Unit.Runner.prototype.postResults = function() {
+            var results = this.getResult();
+            $env.log(
+              results.tests + ' tests, ' +
+              results.assertions + ' assertions, ' +
+              results.failures + ' failures, ' +
+              results.errors + ' errors'
+            );
+          };
         }
+      }
     });
-    
+  };
+
+  var dir = new java.io.File("unit/tmp");
+  var prefix = dir.getAbsolutePath();
+  var files = dir.list();
+  for (var i = 0; i < files.length; i++) {
+    var file = files[i];
+    if (file.match(/_test.html$/)) {
+      run('file://' + prefix + '/' + file);
+    }
+  }
 })(Envjs);
