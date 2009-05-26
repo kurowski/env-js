@@ -2,13 +2,6 @@ $debug("Defining Element");
 /*
 * Element - DOM Level 2
 */
-$w.__defineGetter__("Element", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
-	
 /**
  * @class  DOMElement - By far the vast majority of objects (apart from text) that authors encounter
  *   when traversing a document are Element nodes.
@@ -212,3 +205,4 @@ __extend__(DOMElement.prototype, {
     }
 });
 
+$w.Element = DOMElement;

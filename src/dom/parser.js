@@ -15,7 +15,6 @@ $debug("Initializing Internal DOMParser.");
 //keep one around for internal use
 $domparser = new DOMParser();
 
-$w.__defineGetter__('DOMParser', DOMParser);
 // =========================================================================
 //
 // xmlsax.js - an XML SAX parser in JavaScript.

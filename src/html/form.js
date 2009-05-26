@@ -2,18 +2,7 @@ $debug("Defining HTMLFormElement");
 /* 
 * HTMLAnchorElement - DOM Level 2
 */
-$w.__defineGetter__("Form", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-$w.__defineGetter__("HTMLFormElement", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
-var HTMLFormElement = function(ownerDocument){
+$w.HTMLFormElement = function(ownerDocument){
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
 };
@@ -85,4 +74,4 @@ __extend__(HTMLFormElement.prototype,{
     }
 });
 
-			
+$w.Form = HTMLFormElement;
