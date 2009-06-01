@@ -3,14 +3,7 @@ $debug("Defining HTMLTableElement");
 * HTMLTableElement - DOM Level 2
 * Implementation Provided by Steven Wood
 */
-$w.__defineGetter__("HTMLTableElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLTableElement = function(ownerDocument) {
-
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
 
@@ -196,7 +189,6 @@ __extend__(HTMLTableElement.prototype, {
         this.setAttribute("width", width);
     }
     
-    
 });
 
-			
+$w.HTMLTableElement = HTMLTableElement;		

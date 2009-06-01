@@ -2,12 +2,6 @@ $debug("Defining ProcessingInstruction");
 /*
 * ProcessingInstruction - DOM Level 2
 */
-$w.__defineGetter__('ProcessingInstruction', function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 /**
  * @class  DOMProcessingInstruction - The ProcessingInstruction interface represents a "processing instruction",
  *   used in XML as a way to keep processor-specific information in the text of the document
@@ -47,3 +41,5 @@ __extend__(DOMProcessingInstruction.prototype, {
         return "ProcessingInstruction #"+this._id;
     }
 });
+
+$w.ProcessesingInstruction = DOMProcessingInstruction;

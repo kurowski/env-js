@@ -2,12 +2,6 @@ $debug("Defining HTMLLabelElement");
 /* 
 * HTMLLabelElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLLabelElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLLabelElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -35,4 +29,4 @@ __extend__(HTMLLabelElement.prototype, {
     }
 });
 
-			
+$w.HTMLLabelElement = HTMLLabelElement;	

@@ -2,12 +2,6 @@ $debug("Defining HTMLTableColElement");
 /* 
 * HTMLTableColElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLTableColElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLTableColElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -52,4 +46,4 @@ __extend__(HTMLTableColElement.prototype, {
     }
 });
 
-			
+$w.HTMLTableColElement = HTMLTableColElement;

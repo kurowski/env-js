@@ -2,12 +2,6 @@ $debug("Defining HTMLQuoteElement");
 /* 
 * HTMLQuoteElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLQuoteElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLQuoteElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -22,4 +16,4 @@ __extend__(HTMLQuoteElement.prototype, {
     }
 });
 
-			
+$w.HTMLQuoteElement = HTMLQuoteElement;		

@@ -2,12 +2,6 @@ $debug("Defining HTMLObjectElement");
 /* 
 * HTMLObjectElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLObjectElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLObjectElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -91,4 +85,5 @@ __extend__(HTMLObjectElement.prototype, {
     }
 });
 
+$w.HTMLObjectElement = HTMLObjectElement;
 			

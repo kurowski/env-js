@@ -2,12 +2,6 @@ $debug("Defining CharacterData");
 /*
 * CharacterData - DOM Level 2
 */
-$w.__defineGetter__("CharacterData", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
 /**
  * @class  DOMCharacterData - parent abstract class for DOMText and DOMComment
  * @extends DOMNode
@@ -121,3 +115,5 @@ __extend__(DOMCharacterData.prototype,{
         return ret;
     }
 });
+
+$w.CharacterData = DOMCharacterData;

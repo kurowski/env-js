@@ -1,19 +1,14 @@
-$debug("Defining HTMLxElement");
+$debug("Defining HTMLTitleElement");
 /* 
-* HTMLxElement - DOM Level 2
+* HTMLTitleElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLxElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
-var HTMLxElement = function(ownerDocument) {
+var HTMLTitleElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
 };
-HTMLxElement.prototype = new HTMLElement;
-__extend__(HTMLxElement.prototype, {
+HTMLTitleElement.prototype = new HTMLElement;
+__extend__(HTMLTitleElement.prototype, {
+    //TODO
 });
 
-			
+$w.HTMLTitleElement = HTMLTitleElement;

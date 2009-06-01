@@ -12,12 +12,6 @@ $debug("Defining HTMLLinkElement");
 /* 
 * HTMLLinkElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLLinkElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLLinkElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -80,6 +74,4 @@ __extend__(HTMLLinkElement.prototype, {
     }
 });
 
-			
-
-			
+$w.HTMLLinkElement = HTMLLinkElement;

@@ -2,12 +2,6 @@ $debug("Defining HTMLAnchorElement");
 /* 
 * HTMLAnchorElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLAnchorElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLAnchorElement = function(ownerDocument) {
     //$log("creating anchor element");
     this.HTMLElement = HTMLElement;
@@ -121,4 +115,4 @@ __extend__(HTMLAnchorElement.prototype, {
     }
 });
 
-			
+$w.HTMLAnchorElement = HTMLAnchorElement;

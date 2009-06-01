@@ -2,12 +2,6 @@ $debug("Defining HTMLButtonElement");
 /* 
 * HTMLButtonElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLButtonElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLButtonElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -47,4 +41,4 @@ __extend__(HTMLButtonElement.prototype, {
     }
 });
 
-			
+$w.HTMLButtonElement = HTMLButtonElement;				

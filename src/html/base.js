@@ -2,12 +2,6 @@ $debug("Defining HTMLBaseElement");
 /* 
 * HTMLBaseElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLBaseElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLBaseElement = function(ownerDocument) {
     //$log("creating anchor element");
     this.HTMLElement = HTMLElement;
@@ -29,4 +23,4 @@ __extend__(HTMLBaseElement.prototype, {
     }
 });
 
-			
+$w.HTMLBaseElement = HTMLBaseElement;		

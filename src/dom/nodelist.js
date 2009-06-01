@@ -2,13 +2,6 @@ $debug("Defining NodeList");
 /*
 * NodeList - DOM Level 2
 */
-$w.__defineGetter__('NodeList', function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
-
 /**
  * @class  DOMNodeList - provides the abstraction of an ordered collection of nodes
  *
@@ -200,3 +193,4 @@ var __cloneNodes__ = function(nodelist, deep, parentNode) {
     return cloneNodeList;
 };
 
+$w.NodeList = DOMNodeList;

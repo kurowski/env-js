@@ -3,12 +3,6 @@ $debug("Defining HTMLCollection");
 * HTMLCollection - DOM Level 2
 * Implementation Provided by Steven Wood
 */
-$w.__defineGetter__("HTMLCollection", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
 var HTMLCollection = function(nodelist, type){
 
   __setArray__(this, []);
@@ -34,6 +28,8 @@ HTMLCollection.prototype = {
     namedItem : function (name) {
     }
 };
+
+$w.HTMLCollection = HTMLCollection;
 
 /*var HTMLCollection = function(nodelist, type){
   var $items = [], 

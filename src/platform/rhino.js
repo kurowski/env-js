@@ -140,11 +140,11 @@
 			}
 			
             
+            var respheadlength = connection.getHeaderFields().size();
             // Stick the response headers into responseHeaders
-            for (var i = 0; ; i++) { 
+            for (var i = 0; i < respheadlength; i++) { 
                 var headerName = connection.getHeaderFieldKey(i); 
                 var headerValue = connection.getHeaderField(i); 
-                if (!headerName && !headerValue) break; 
                 if (headerName)
                     xhr.responseHeaders[headerName+''] = headerValue+'';
             }

@@ -2,12 +2,6 @@ $debug("Defining HTMLInputElement");
 /* 
 * HTMLInputElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLInputElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLInputElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -129,4 +123,4 @@ __extend__(HTMLInputElement.prototype, {
     }
 });
 
-			
+$w.HTMLInputElement = HTMLInputElement;

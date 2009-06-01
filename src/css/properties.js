@@ -1,13 +1,6 @@
 /*
 * CSS2Properties - DOM Level 2 CSS
 */
-$w.__defineGetter__("CSS2Properties", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
-
 var CSS2Properties = function(options){
     __extend__(this, __supportedStyles__);
     __cssTextToStyles__(this, options.cssText?options.cssText:"");
@@ -213,3 +206,5 @@ var __supportedStyles__ = {
     wordSpacing:	"",
     zIndex:	""
 };
+
+$w.CSS2Properties = CSS2Properties;

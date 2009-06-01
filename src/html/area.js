@@ -2,12 +2,6 @@ $debug("Defining HTMLAreaElement");
 /* 
 * HTMLAreaElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLAreaElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLAreaElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -59,4 +53,5 @@ __extend__(HTMLAreaElement.prototype, {
     }
 });
 
+$w.HTMLAreaElement = HTMLAreaElement;
 			

@@ -2,7 +2,7 @@ $debug("Defining HTMLElement");
 /*
 * HTMLElement - DOM Level 2
 */
-$w.HTMLElement = function(ownerDocument) {
+var HTMLElement = function(ownerDocument) {
     this.DOMElement = DOMElement;
     this.DOMElement(ownerDocument);
     
@@ -216,3 +216,5 @@ var __blur__ = function(element){
 	event.initEvent("blur");
 	element.dispatchEvent(event);
 };
+
+$w.HTMLElement = HTMLElement;

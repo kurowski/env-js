@@ -2,12 +2,6 @@ $debug("Defining HTMLMetaElement");
 /* 
 * HTMLMetaElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLMetaElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLMetaElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -40,4 +34,4 @@ __extend__(HTMLMetaElement.prototype, {
     }
 });
 
-			
+$w.HTMLMetaElement = HTMLMetaElement;

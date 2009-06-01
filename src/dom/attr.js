@@ -2,13 +2,6 @@ $debug("Defining Attr");
 /*
 * Attr - DOM Level 2
 */
-$w.__defineGetter__("Attr", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
-
 /**
  * @class  DOMAttr - The Attr interface represents an attribute in an Element object
  * @extends DOMNode
@@ -54,5 +47,6 @@ __extend__(DOMAttr.prototype, {
     toString : function(){
         return "Attr #" + this._id + " " + this.name;
     }
-});    
+});
 
+$w.Attr = DOMAttr;

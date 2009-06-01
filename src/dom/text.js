@@ -2,12 +2,6 @@ $debug("Defining Text");
 /*
 * Text - DOM Level 2
 */
-$w.__defineGetter__("Text", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 /**
  * @class  DOMText - The Text interface represents the textual content (termed character data in XML) of an Element or Attr.
  *   If there is no markup inside an element's content, the text is contained in a single object implementing the Text interface
@@ -17,7 +11,7 @@ $w.__defineGetter__("Text", function(){
  * @author Jon van Noort (jon@webarcana.com.au) and David Joham (djoham@yahoo.com)
  * @param  ownerDocument : DOMDocument - The Document object associated with this node.
  */
-DOMText = function(ownerDocument) {
+var DOMText = function(ownerDocument) {
   this.DOMCharacterData  = DOMCharacterData;
   this.DOMCharacterData(ownerDocument);
 
@@ -76,3 +70,4 @@ __extend__(DOMText.prototype,{
     }
 });
 
+$w.Text = DOMText;

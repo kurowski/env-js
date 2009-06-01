@@ -1,15 +1,4 @@
 $debug("Defining Document");
-/*
-* Document - DOM Level 2
-*  The Document object is not directly 
-*/
-$w.__defineGetter__('Document', function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
-
 /**
  * @class  DOMDocument - The Document interface represents the entire HTML or XML document.
  *   Conceptually, it is the root of the document tree, and provides the primary access to the document's data.
@@ -385,3 +374,5 @@ var __isValidNamespace__ = function(doc, namespaceURI, qualifiedName, isAttribut
     
       return valid;
 };
+
+$w.Document = DOMDocument;

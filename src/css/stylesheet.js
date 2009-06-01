@@ -1,12 +1,6 @@
 /* 
 * CSSStyleSheet - DOM Level 2
 */
-$w.__defineGetter__("CSSStyleSheet", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
 var CSSStyleSheet = function(options){
     var $cssRules, 
         $disabled = options.disabled?options.disabled:false,
@@ -54,3 +48,5 @@ var CSSStyleSheet = function(options){
       removeRule: function(index){this.deleteRule(index);}//IE - may be deprecated
     });
 };
+
+$w.CSSStyleSheet = CSSStyleSheet;

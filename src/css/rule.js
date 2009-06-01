@@ -1,12 +1,6 @@
 /* 
 * CSSRule - DOM Level 2
 */
-$w.__defineGetter__("CSSRule", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
 var CSSRule = function(options){
   var $style, 
       $selectorText = options.selectorText?options.selectorText:"";
@@ -25,3 +19,4 @@ var CSSRule = function(options){
       }
     });
 };
+$w.CSSRule = CSSRule;

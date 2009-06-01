@@ -1,14 +1,8 @@
-$debug("Defining HTMLxElement");
+$debug("Defining HTMLTableSectionElement");
 /* 
 * HTMLxElement - DOM Level 2
 * - Contributed by Steven Wood
 */
-$w.__defineGetter__("HTMLTableSectionElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLTableSectionElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -94,4 +88,4 @@ __extend__(HTMLTableSectionElement.prototype, {
 
 });
 
-			
+$w.HTMLTableSectionElement = HTMLTableSectionElement;

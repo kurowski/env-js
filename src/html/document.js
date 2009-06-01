@@ -1,13 +1,7 @@
 $debug("Defining HTMLDocument");
 /*
 * HTMLDocument - DOM Level 2
-*  The Document object is not directly 
 */
-$w.__defineGetter__("HTMLDocument", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
 /**
  * @class  HTMLDocument - The Document interface represents the entire HTML or XML document.
  *   Conceptually, it is the root of the document tree, and provides the primary access to the document's data.
@@ -187,18 +181,4 @@ __extend__(HTMLDocument.prototype, {
     }
 });
 
-//This is useful as html elements that modify the dom must also run through the new 
-//nodes and determine if they are javascript tags and load it.  This is really the fun 
-//parts! ;)
-function __execScripts__( node ) {
-	if ( node.nodeName == "SCRIPT" ) {
-		if ( !node.getAttribute("src") ) {
-			eval.call( window, node.textContent );
-		}
-	} else {
-		var scripts = node.getElementsByTagName("script");
-		for ( var i = 0; i < scripts.length; i++ ) {
-			__execScripts__( node );
-		}
-	}
-};
+$w.HTMLDocument = HTMLDocument;

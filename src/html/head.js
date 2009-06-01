@@ -2,12 +2,6 @@ $debug("Defining HTMLHeadElement");
 /* 
 * HTMLHeadElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLHeadElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLHeadElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -46,3 +40,5 @@ var __evalScript__ = function(newChild){
         }
     }
 };
+
+$w.HTMLHeadElement = HTMLHeadElement;

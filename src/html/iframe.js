@@ -2,12 +2,6 @@ $debug("Defining HTMLIFrameElement");
 /* 
 * HTMLIFrameElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLIFrameElement", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
 var HTMLIFrameElement = function(ownerDocument) {
     this.HTMLFrameElement = HTMLFrameElement;
     this.HTMLFrameElement(ownerDocument);
@@ -28,5 +22,5 @@ __extend__(HTMLIFrameElement.prototype, {
     }
 });
 
-
+$w.HTMLIFrameElement = HTMLIFrameElement;
 			

@@ -1,11 +1,5 @@
 //DOMImplementation
 $debug("Defining DOMImplementation");
-$w.__defineGetter__("DOMImplementation", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
 /**
  * @class  DOMImplementation - provides a number of methods for performing operations
  *   that are independent of any particular instance of the document object model.

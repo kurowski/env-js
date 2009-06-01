@@ -2,12 +2,6 @@ $debug("Defining HTMLMapElement");
 /* 
 * HTMLMapElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLMapElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLMapElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -25,4 +19,4 @@ __extend__(HTMLMapElement.prototype, {
     }
 });
 
-			
+$w.HTMLMapElement = HTMLMapElement;

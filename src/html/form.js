@@ -1,8 +1,8 @@
 $debug("Defining HTMLFormElement");
 /* 
-* HTMLAnchorElement - DOM Level 2
+* HTMLFormElement - DOM Level 2
 */
-$w.HTMLFormElement = function(ownerDocument){
+var HTMLFormElement = function(ownerDocument){
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
 };
@@ -74,4 +74,4 @@ __extend__(HTMLFormElement.prototype,{
     }
 });
 
-$w.Form = HTMLFormElement;
+$w.HTMLFormElement	= HTMLFormElement;

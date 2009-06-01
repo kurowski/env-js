@@ -2,12 +2,6 @@ $debug("Defining HTMLImageElement");
 /* 
 * HTMLImageElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLImageElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLImageElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -58,4 +52,4 @@ __extend__(HTMLImageElement.prototype, {
     }
 });
 
-			
+$w.HTMLImageElement = HTMLImageElement;

@@ -2,12 +2,6 @@ $debug("Defining CDATASection");
 /*
 * CDATASection - DOM Level 2
 */
-$w.__defineGetter__("CDATASection", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
 /**
  * @class  DOMCDATASection - CDATA sections are used to escape blocks of text containing characters that would otherwise be regarded as markup.
  *   The only delimiter that is recognized in a CDATA section is the "\]\]\>" string that ends the CDATA section
@@ -33,3 +27,5 @@ __extend__(DOMCDATASection.prototype,{
         return "CDATA #"+this._id;
     }
 });
+
+$w.CDATASection = DOMCDATASection;

@@ -301,11 +301,11 @@ var Envjs = function(){
 			}
 			
             
+            var respheadlength = connection.getHeaderFields().size();
             // Stick the response headers into responseHeaders
-            for (var i = 0; ; i++) { 
+            for (var i = 0; i < respheadlength; i++) { 
                 var headerName = connection.getHeaderFieldKey(i); 
                 var headerValue = connection.getHeaderField(i); 
-                if (!headerName && !headerValue) break; 
                 if (headerName)
                     xhr.responseHeaders[headerName+''] = headerValue+'';
             }
@@ -631,13 +631,6 @@ $debug("Defining NodeList");
 /*
 * NodeList - DOM Level 2
 */
-$w.__defineGetter__('NodeList', function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
-
 /**
  * @class  DOMNodeList - provides the abstraction of an ordered collection of nodes
  *
@@ -829,6 +822,7 @@ var __cloneNodes__ = function(nodelist, deep, parentNode) {
     return cloneNodeList;
 };
 
+$w.NodeList = DOMNodeList;
 
 /**
  * @class  DOMNamedNodeMap - used to represent collections of nodes that can be accessed by name
@@ -1196,22 +1190,6 @@ $debug("Defining Node");
 /*
 * Node - DOM Level 2
 */	
-$w.__defineGetter__('Node', function(){
-  return __extend__(function(){
-        throw new Error("Object cannot be created in this context");
-      } , {
-  		ELEMENT_NODE    :1,
-  		ATTRIBUTE_NODE  :2,
-  		TEXT_NODE       :3,
-  		CDATA_SECTION_NODE: 4,
-  		PROCESSING_INSTRUCTION_NODE: 7,
-  		COMMENT_NODE: 8,
-  		DOCUMENT_NODE: 9,
-  		DOCUMENT_TYPE_NODE: 10,
-  		DOCUMENT_FRAGMENT_NODE: 11
-	});
-});
-
 /**
  * @class  DOMNode - The Node interface is the primary datatype for the entire Document Object Model.
  *   It represents a single node in the document tree.
@@ -1803,6 +1781,9 @@ var __isAncestor__ = function(target, node) {
 var __ownerDocument__ = function(node){
     return (node.nodeType == DOMNode.DOCUMENT_NODE)?node:node.ownerDocument;
 };
+
+$w.Node = DOMNode;
+
 /**
  * @class  DOMNamespace - The Namespace interface represents an namespace in an Element object
  *
@@ -1856,12 +1837,6 @@ $debug("Defining CharacterData");
 /*
 * CharacterData - DOM Level 2
 */
-$w.__defineGetter__("CharacterData", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
 /**
  * @class  DOMCharacterData - parent abstract class for DOMText and DOMComment
  * @extends DOMNode
@@ -1975,16 +1950,11 @@ __extend__(DOMCharacterData.prototype,{
         return ret;
     }
 });
-$debug("Defining Text");
+
+$w.CharacterData = DOMCharacterData;$debug("Defining Text");
 /*
 * Text - DOM Level 2
 */
-$w.__defineGetter__("Text", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 /**
  * @class  DOMText - The Text interface represents the textual content (termed character data in XML) of an Element or Attr.
  *   If there is no markup inside an element's content, the text is contained in a single object implementing the Text interface
@@ -1994,7 +1964,7 @@ $w.__defineGetter__("Text", function(){
  * @author Jon van Noort (jon@webarcana.com.au) and David Joham (djoham@yahoo.com)
  * @param  ownerDocument : DOMDocument - The Document object associated with this node.
  */
-DOMText = function(ownerDocument) {
+var DOMText = function(ownerDocument) {
   this.DOMCharacterData  = DOMCharacterData;
   this.DOMCharacterData(ownerDocument);
 
@@ -2053,16 +2023,10 @@ __extend__(DOMText.prototype,{
     }
 });
 
-$debug("Defining CDATASection");
+$w.Text = DOMText;$debug("Defining CDATASection");
 /*
 * CDATASection - DOM Level 2
 */
-$w.__defineGetter__("CDATASection", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
 /**
  * @class  DOMCDATASection - CDATA sections are used to escape blocks of text containing characters that would otherwise be regarded as markup.
  *   The only delimiter that is recognized in a CDATA section is the "\]\]\>" string that ends the CDATA section
@@ -2087,16 +2051,12 @@ __extend__(DOMCDATASection.prototype,{
     toString : function(){
         return "CDATA #"+this._id;
     }
-});$debug("Defining Comment");
+});
+
+$w.CDATASection = DOMCDATASection;$debug("Defining Comment");
 /* 
 * Comment - DOM Level 2
 */
-$w.__defineGetter__("Comment", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 /**
  * @class  DOMComment - This represents the content of a comment, i.e., all the characters between the starting '<!--' and ending '-->'
  * @extends DOMCharacterData
@@ -2121,27 +2081,21 @@ __extend__(DOMComment.prototype, {
         return "Comment #"+this._id;
     }
 });
+
+$w.Comment = DOMComment;
 $debug("Defining DocumentType");
 ;/*
 * DocumentType - DOM Level 2
 */
-$w.__defineGetter__('DocumentType', function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
+var DOMDocumentType    = function() { 
+    $error("DOMDocumentType.constructor(): Not Implemented"   ); 
+};
 
-var DOMDocumentType    = function() { $error("DOMDocumentType.constructor(): Not Implemented"   ); };$debug("Defining Attr");
+$w.DocumentType = DOMDocumentType;
+$debug("Defining Attr");
 /*
 * Attr - DOM Level 2
 */
-$w.__defineGetter__("Attr", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
-
 /**
  * @class  DOMAttr - The Attr interface represents an attribute in an Element object
  * @extends DOMNode
@@ -2187,19 +2141,10 @@ __extend__(DOMAttr.prototype, {
     toString : function(){
         return "Attr #" + this._id + " " + this.name;
     }
-});    
-
-$debug("Defining Element");
-/*
-* Element - DOM Level 2
-*/
-$w.__defineGetter__("Element", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
 });
 
-	
+$w.Attr = DOMAttr;
+$debug("Defining Element");
 /**
  * @class  DOMElement - By far the vast majority of objects (apart from text) that authors encounter
  *   when traversing a document are Element nodes.
@@ -2403,6 +2348,7 @@ __extend__(DOMElement.prototype, {
     }
 });
 
+$w.Element = DOMElement;
 /**
  * @class  DOMException - raised when an operation is impossible to perform
  * @author Jon van Noort (jon@webarcana.com.au)
@@ -2435,12 +2381,6 @@ $debug("Defining DocumentFragment");
 /* 
 * DocumentFragment - DOM Level 2
 */
-$w.__defineGetter__("DocumentFragment", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 /**
  * @class  DOMDocumentFragment - DocumentFragment is a "lightweight" or "minimal" Document object.
  * @extends DOMNode
@@ -2472,16 +2412,12 @@ __extend__(DOMDocumentFragment.prototype,{
         return "DocumentFragment #"+this._id;
     }
 });
+
+$w.DocumentFragment = DOMDocumentFragment;
 $debug("Defining ProcessingInstruction");
 /*
 * ProcessingInstruction - DOM Level 2
 */
-$w.__defineGetter__('ProcessingInstruction', function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 /**
  * @class  DOMProcessingInstruction - The ProcessingInstruction interface represents a "processing instruction",
  *   used in XML as a way to keep processor-specific information in the text of the document
@@ -2521,6 +2457,8 @@ __extend__(DOMProcessingInstruction.prototype, {
         return "ProcessingInstruction #"+this._id;
     }
 });
+
+$w.ProcessesingInstruction = DOMProcessingInstruction;
 $debug("Defining DOMParser");
 /*
 * DOMParser
@@ -2538,7 +2476,7 @@ $debug("Initializing Internal DOMParser.");
 //keep one around for internal use
 $domparser = new DOMParser();
 
-$w.__defineGetter__('DOMParser', DOMParser);
+$w.DOMParser = DOMParser;
 // =========================================================================
 //
 // xmlsax.js - an XML SAX parser in JavaScript.
@@ -3694,12 +3632,6 @@ function __unescapeXML__(str) {
 
 //DOMImplementation
 $debug("Defining DOMImplementation");
-$w.__defineGetter__("DOMImplementation", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
 /**
  * @class  DOMImplementation - provides a number of methods for performing operations
  *   that are independent of any particular instance of the document object model.
@@ -4271,17 +4203,6 @@ $debug("Initializing document.implementation");
 var $implementation =  new DOMImplementation();
 $implementation.namespaceAware = false;
 $implementation.errorChecking = false;$debug("Defining Document");
-/*
-* Document - DOM Level 2
-*  The Document object is not directly 
-*/
-$w.__defineGetter__('Document', function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
-
 /**
  * @class  DOMDocument - The Document interface represents the entire HTML or XML document.
  *   Conceptually, it is the root of the document tree, and provides the primary access to the document's data.
@@ -4657,6 +4578,8 @@ var __isValidNamespace__ = function(doc, namespaceURI, qualifiedName, isAttribut
     
       return valid;
 };
+
+$w.Document = DOMDocument;
 /*
 *	parser.js
 */
@@ -5000,13 +4923,7 @@ var __isValidNamespace__ = function(doc, namespaceURI, qualifiedName, isAttribut
 $debug("Defining HTMLDocument");
 /*
 * HTMLDocument - DOM Level 2
-*  The Document object is not directly 
 */
-$w.__defineGetter__("HTMLDocument", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
 /**
  * @class  HTMLDocument - The Document interface represents the entire HTML or XML document.
  *   Conceptually, it is the root of the document tree, and provides the primary access to the document's data.
@@ -5186,33 +5103,11 @@ __extend__(HTMLDocument.prototype, {
     }
 });
 
-//This is useful as html elements that modify the dom must also run through the new 
-//nodes and determine if they are javascript tags and load it.  This is really the fun 
-//parts! ;)
-function __execScripts__( node ) {
-	if ( node.nodeName == "SCRIPT" ) {
-		if ( !node.getAttribute("src") ) {
-			eval.call( window, node.textContent );
-		}
-	} else {
-		var scripts = node.getElementsByTagName("script");
-		for ( var i = 0; i < scripts.length; i++ ) {
-			__execScripts__( node );
-		}
-	}
-};$debug("Defining HTMLElement");
+$w.HTMLDocument = HTMLDocument;
+$debug("Defining HTMLElement");
 /*
 * HTMLElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-$w.HTMLElement.__defineGetter__("prototype", function(){
-    return HTMLElement.prototype;
-});
-
 var HTMLElement = function(ownerDocument) {
     this.DOMElement = DOMElement;
     this.DOMElement(ownerDocument);
@@ -5427,17 +5322,13 @@ var __blur__ = function(element){
 	event.initEvent("blur");
 	element.dispatchEvent(event);
 };
+
+$w.HTMLElement = HTMLElement;
 $debug("Defining HTMLCollection");
 /*
 * HTMLCollection - DOM Level 2
 * Implementation Provided by Steven Wood
 */
-$w.__defineGetter__("HTMLCollection", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
 var HTMLCollection = function(nodelist, type){
 
   __setArray__(this, []);
@@ -5463,6 +5354,8 @@ HTMLCollection.prototype = {
     namedItem : function (name) {
     }
 };
+
+$w.HTMLCollection = HTMLCollection;
 
 /*var HTMLCollection = function(nodelist, type){
   var $items = [], 
@@ -5506,12 +5399,6 @@ HTMLCollection.prototype = {
 /* 
 * HTMLAnchorElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLAnchorElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLAnchorElement = function(ownerDocument) {
     //$log("creating anchor element");
     this.HTMLElement = HTMLElement;
@@ -5625,21 +5512,14 @@ __extend__(HTMLAnchorElement.prototype, {
     }
 });
 
-			$debug("Defining Anchor");
+$w.HTMLAnchorElement = HTMLAnchorElement;$debug("Defining Anchor");
 /* 
 * Anchor - DOM Level 2
 */
-$w.__defineGetter__("Anchor", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var Anchor = function(ownerDocument) {
     this.HTMLAnchorElement = HTMLAnchorElement;
     this.HTMLAnchorElement(ownerDocument);
 };
-Anchor.prototype = new Anchor;
 
 (function(){
     //static regular expressions
@@ -5710,16 +5590,12 @@ Anchor.prototype = new Anchor;
   });
 
 })();
-			$debug("Defining HTMLAreaElement");
+
+$w.Anchor = Anchor;
+$debug("Defining HTMLAreaElement");
 /* 
 * HTMLAreaElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLAreaElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLAreaElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -5771,16 +5647,11 @@ __extend__(HTMLAreaElement.prototype, {
     }
 });
 
+$w.HTMLAreaElement = HTMLAreaElement;
 			$debug("Defining HTMLBaseElement");
 /* 
 * HTMLBaseElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLBaseElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLBaseElement = function(ownerDocument) {
     //$log("creating anchor element");
     this.HTMLElement = HTMLElement;
@@ -5802,16 +5673,10 @@ __extend__(HTMLBaseElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLQuoteElement");
+$w.HTMLBaseElement = HTMLBaseElement;		$debug("Defining HTMLQuoteElement");
 /* 
 * HTMLQuoteElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLQuoteElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLQuoteElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -5826,16 +5691,10 @@ __extend__(HTMLQuoteElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLButtonElement");
+$w.HTMLQuoteElement = HTMLQuoteElement;		$debug("Defining HTMLButtonElement");
 /* 
 * HTMLButtonElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLButtonElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLButtonElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -5875,16 +5734,10 @@ __extend__(HTMLButtonElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLTableColElement");
+$w.HTMLButtonElement = HTMLButtonElement;				$debug("Defining HTMLTableColElement");
 /* 
 * HTMLTableColElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLTableColElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLTableColElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -5929,16 +5782,11 @@ __extend__(HTMLTableColElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLModElement");
+$w.HTMLTableColElement = HTMLTableColElement;
+$debug("Defining HTMLModElement");
 /* 
 * HTMLModElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLModElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLModElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -5959,16 +5807,10 @@ __extend__(HTMLModElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLFieldSetElement");
+$w.HTMLModElement = HTMLModElement;	$debug("Defining HTMLFieldSetElement");
 /* 
 * HTMLFieldSetElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLFieldSetElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLFieldSetElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -5984,21 +5826,10 @@ __extend__(HTMLFieldSetElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLFormElement");
+$w.HTMLFieldSetElement = HTMLFieldSetElement;	$debug("Defining HTMLFormElement");
 /* 
-* HTMLAnchorElement - DOM Level 2
+* HTMLFormElement - DOM Level 2
 */
-$w.__defineGetter__("Form", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-$w.__defineGetter__("HTMLFormElement", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
 var HTMLFormElement = function(ownerDocument){
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6071,16 +5902,10 @@ __extend__(HTMLFormElement.prototype,{
     }
 });
 
-			$debug("Defining HTMLFrameElement");
+$w.HTMLFormElement	= HTMLFormElement;$debug("Defining HTMLFrameElement");
 /* 
 * HTMLFrameElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLFrameElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLFrameElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6152,16 +5977,11 @@ __extend__(HTMLFrameElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLFrameSetElement");
+$w.HTMLFrameElement = HTMLFrameElement;
+$debug("Defining HTMLFrameSetElement");
 /* 
 * HTMLFrameSetElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLFrameSetElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLFrameSetElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6182,16 +6002,10 @@ __extend__(HTMLFrameSetElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLHeadElement");
+$w.HTMLFrameSetElement = HTMLFrameSetElement;	$debug("Defining HTMLHeadElement");
 /* 
 * HTMLHeadElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLHeadElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLHeadElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6229,16 +6043,13 @@ var __evalScript__ = function(newChild){
             $policy.loadScript(newChild);
         }
     }
-};$debug("Defining HTMLIFrameElement");
+};
+
+$w.HTMLHeadElement = HTMLHeadElement;
+$debug("Defining HTMLIFrameElement");
 /* 
 * HTMLIFrameElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLIFrameElement", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
 var HTMLIFrameElement = function(ownerDocument) {
     this.HTMLFrameElement = HTMLFrameElement;
     this.HTMLFrameElement(ownerDocument);
@@ -6259,17 +6070,11 @@ __extend__(HTMLIFrameElement.prototype, {
     }
 });
 
-
+$w.HTMLIFrameElement = HTMLIFrameElement;
 			$debug("Defining HTMLImageElement");
 /* 
 * HTMLImageElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLImageElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLImageElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6320,16 +6125,10 @@ __extend__(HTMLImageElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLInputElement");
+$w.HTMLImageElement = HTMLImageElement;$debug("Defining HTMLInputElement");
 /* 
 * HTMLInputElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLInputElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLInputElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6451,16 +6250,10 @@ __extend__(HTMLInputElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLLabelElement");
+$w.HTMLInputElement = HTMLInputElement;$debug("Defining HTMLLabelElement");
 /* 
 * HTMLLabelElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLLabelElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLLabelElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6488,16 +6281,10 @@ __extend__(HTMLLabelElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLLegendElement");
+$w.HTMLLabelElement = HTMLLabelElement;	$debug("Defining HTMLLegendElement");
 /* 
 * HTMLLegendElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLLegendElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLLegendElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6519,7 +6306,7 @@ __extend__(HTMLLegendElement.prototype, {
     }
 });
 
-			/**
+$w.HTMLLegendElement = HTMLLegendElement;	/**
 * Link - HTMLElement 
 */
 $w.__defineGetter__("Link", function(){
@@ -6533,12 +6320,6 @@ $debug("Defining HTMLLinkElement");
 /* 
 * HTMLLinkElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLLinkElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLLinkElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6601,18 +6382,11 @@ __extend__(HTMLLinkElement.prototype, {
     }
 });
 
-			
-
-			$debug("Defining HTMLMapElement");
+$w.HTMLLinkElement = HTMLLinkElement;
+$debug("Defining HTMLMapElement");
 /* 
 * HTMLMapElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLMapElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLMapElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6630,16 +6404,10 @@ __extend__(HTMLMapElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLMetaElement");
+$w.HTMLMapElement = HTMLMapElement;$debug("Defining HTMLMetaElement");
 /* 
 * HTMLMetaElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLMetaElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLMetaElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6672,16 +6440,11 @@ __extend__(HTMLMetaElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLObjectElement");
+$w.HTMLMetaElement = HTMLMetaElement;
+$debug("Defining HTMLObjectElement");
 /* 
 * HTMLObjectElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLObjectElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLObjectElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6765,16 +6528,11 @@ __extend__(HTMLObjectElement.prototype, {
     }
 });
 
+$w.HTMLObjectElement = HTMLObjectElement;
 			$debug("Defining HTMLOptGroupElement");
 /* 
 * HTMLOptGroupElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLOptGroupElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLOptGroupElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6795,16 +6553,10 @@ __extend__(HTMLOptGroupElement.prototype, {
     },
 });
 
-			$debug("Defining HTMLOptionElement");
+$w.HTMLOptGroupElement = HTMLOptGroupElement;		$debug("Defining HTMLOptionElement");
 /* 
 * HTMLOptionElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLOptionElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLOptionElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6865,16 +6617,11 @@ __extend__(HTMLOptionElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLParamElement");
+$w.HTMLOptionElement = HTMLOptionElement;
+$debug("Defining HTMLParamElement");
 /* 
 * HTMLParamElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLParamElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLParamElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6907,16 +6654,11 @@ __extend__(HTMLParamElement.prototype, {
     },
 });
 
-			$debug("Defining HTMLScriptElement");
+$w.HTMLParamElement = HTMLParamElement;
+		$debug("Defining HTMLScriptElement");
 /* 
 * HTMLScriptElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLScriptElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLScriptElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -6976,16 +6718,10 @@ __extend__(HTMLScriptElement.prototype, {
     }
 });
 
-            $debug("Defining HTMLSelectElement");
+$w.HTMLScriptElement = HTMLScriptElement;$debug("Defining HTMLSelectElement");
 /* 
 * HTMLSelectElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLSelectElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLSelectElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -7087,16 +6823,10 @@ __extend__(HTMLSelectElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLStyleElement");
+$w.HTMLSelectElement = HTMLSelectElement;$debug("Defining HTMLStyleElement");
 /* 
 * HTMLStyleElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLStyleElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLStyleElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -7123,19 +6853,12 @@ __extend__(HTMLStyleElement.prototype, {
     }
 });
 
-			$debug("Defining HTMLTableElement");
+$w.HTMLStyleElement = HTMLStyleElement;$debug("Defining HTMLTableElement");
 /* 
 * HTMLTableElement - DOM Level 2
 * Implementation Provided by Steven Wood
 */
-$w.__defineGetter__("HTMLTableElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLTableElement = function(ownerDocument) {
-
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
 
@@ -7321,20 +7044,13 @@ __extend__(HTMLTableElement.prototype, {
         this.setAttribute("width", width);
     }
     
-    
 });
 
-			$debug("Defining HTMLxElement");
+$w.HTMLTableElement = HTMLTableElement;		$debug("Defining HTMLTableSectionElement");
 /* 
 * HTMLxElement - DOM Level 2
 * - Contributed by Steven Wood
 */
-$w.__defineGetter__("HTMLTableSectionElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLTableSectionElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -7420,17 +7136,12 @@ __extend__(HTMLTableSectionElement.prototype, {
 
 });
 
-			$debug("Defining HTMLTableCellElement");
+$w.HTMLTableSectionElement = HTMLTableSectionElement;
+$debug("Defining HTMLTableCellElement");
 /* 
 * HTMLTableCellElement - DOM Level 2
 * Implementation Provided by Steven Wood
 */
-$w.__defineGetter__("HTMLTableCellElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLTableCellElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -7443,17 +7154,11 @@ __extend__(HTMLTableCellElement.prototype, {
     
 });
 
-			$debug("Defining HTMLRowElement");
+$w.HTMLTableCellElement	= HTMLTableCellElement;$debug("Defining HTMLTableRowElement");
 /* 
 * HTMLRowElement - DOM Level 2
 * Implementation Provided by Steven Wood
 */
-$w.__defineGetter__("HTMLTableRowElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLTableRowElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -7553,7 +7258,8 @@ __extend__(HTMLTableRowElement.prototype, {
 
 });
 
-			/**
+$w.HTMLTableRowElement = HTMLTableRowElement;
+/**
  * @author thatcher
  */
 $debug("Defining XMLSerializer");
@@ -7681,20 +7387,6 @@ __extend__(XSLTProcessor.prototype, {
 /*
 * event.js
 */
-$w.__defineGetter__("Event", function(){
-    __extend__(this,{
-        CAPTURING_PHASE : 1,
-        AT_TARGET       : 2,
-        BUBBLING_PHASE  : 3
-    });
-    if(this.__output__ == undefined) {
-        this.__output__ = function(){
-            throw new Error("Object cannot be created in this context");
-        };
-    }
-    return this.__output__;
-});
-
 var Event = function(options){
   if(options === undefined){
       options={target:window,currentTarget:window};
@@ -7730,6 +7422,7 @@ var Event = function(options){
   });
 };
 
+$w.Event = Event;
 $debug("Defining MouseEvent");
 /*
 *	mouseevent.js
@@ -7744,13 +7437,6 @@ var $onblur,
     $onresize;/*
 * CSS2Properties - DOM Level 2 CSS
 */
-$w.__defineGetter__("CSS2Properties", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
-
 var CSS2Properties = function(options){
     __extend__(this, __supportedStyles__);
     __cssTextToStyles__(this, options.cssText?options.cssText:"");
@@ -7955,15 +7641,11 @@ var __supportedStyles__ = {
     width:	"",
     wordSpacing:	"",
     zIndex:	""
-};/* 
+};
+
+$w.CSS2Properties = CSS2Properties;/* 
 * CSSRule - DOM Level 2
 */
-$w.__defineGetter__("CSSRule", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
 var CSSRule = function(options){
   var $style, 
       $selectorText = options.selectorText?options.selectorText:"";
@@ -7982,15 +7664,10 @@ var CSSRule = function(options){
       }
     });
 };
+$w.CSSRule = CSSRule;
 /* 
 * CSSStyleSheet - DOM Level 2
 */
-$w.__defineGetter__("CSSStyleSheet", function(){
-  return function(){
-    throw new Error("Object cannot be created in this context");
-  };
-});
-
 var CSSStyleSheet = function(options){
     var $cssRules, 
         $disabled = options.disabled?options.disabled:false,
@@ -8038,6 +7715,8 @@ var CSSStyleSheet = function(options){
       removeRule: function(index){this.deleteRule(index);}//IE - may be deprecated
     });
 };
+
+$w.CSSStyleSheet = CSSStyleSheet;
 /*
 *	location.js
 *   - requires env

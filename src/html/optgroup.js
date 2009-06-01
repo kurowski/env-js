@@ -2,12 +2,6 @@ $debug("Defining HTMLOptGroupElement");
 /* 
 * HTMLOptGroupElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLOptGroupElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLOptGroupElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -28,4 +22,4 @@ __extend__(HTMLOptGroupElement.prototype, {
     },
 });
 
-			
+$w.HTMLOptGroupElement = HTMLOptGroupElement;		

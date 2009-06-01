@@ -2,12 +2,6 @@ $debug("Defining HTMLSelectElement");
 /* 
 * HTMLSelectElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLSelectElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLSelectElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -109,4 +103,4 @@ __extend__(HTMLSelectElement.prototype, {
     }
 });
 
-			
+$w.HTMLSelectElement = HTMLSelectElement;

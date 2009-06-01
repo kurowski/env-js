@@ -2,12 +2,6 @@ $debug("Defining HTMLFieldSetElement");
 /* 
 * HTMLFieldSetElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLFieldSetElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLFieldSetElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -23,4 +17,4 @@ __extend__(HTMLFieldSetElement.prototype, {
     }
 });
 
-			
+$w.HTMLFieldSetElement = HTMLFieldSetElement;	

@@ -1,7 +1,4 @@
 $debug("Defining Element");
-/*
-* Element - DOM Level 2
-*/
 /**
  * @class  DOMElement - By far the vast majority of objects (apart from text) that authors encounter
  *   when traversing a document are Element nodes.

@@ -2,12 +2,6 @@ $debug("Defining HTMLModElement");
 /* 
 * HTMLModElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLModElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLModElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -28,4 +22,4 @@ __extend__(HTMLModElement.prototype, {
     }
 });
 
-			
+$w.HTMLModElement = HTMLModElement;	

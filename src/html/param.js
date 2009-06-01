@@ -2,12 +2,6 @@ $debug("Defining HTMLParamElement");
 /* 
 * HTMLParamElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLParamElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLParamElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -40,4 +34,5 @@ __extend__(HTMLParamElement.prototype, {
     },
 });
 
-			
+$w.HTMLParamElement = HTMLParamElement;
+		

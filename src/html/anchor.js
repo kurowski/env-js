@@ -2,17 +2,10 @@ $debug("Defining Anchor");
 /* 
 * Anchor - DOM Level 2
 */
-$w.__defineGetter__("Anchor", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var Anchor = function(ownerDocument) {
     this.HTMLAnchorElement = HTMLAnchorElement;
     this.HTMLAnchorElement(ownerDocument);
 };
-Anchor.prototype = new Anchor;
 
 (function(){
     //static regular expressions
@@ -83,4 +76,5 @@ Anchor.prototype = new Anchor;
   });
 
 })();
-			
+
+$w.Anchor = Anchor;

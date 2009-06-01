@@ -2,20 +2,6 @@ $debug("Defining Event");
 /*
 * event.js
 */
-$w.__defineGetter__("Event", function(){
-    __extend__(this,{
-        CAPTURING_PHASE : 1,
-        AT_TARGET       : 2,
-        BUBBLING_PHASE  : 3
-    });
-    if(this.__output__ == undefined) {
-        this.__output__ = function(){
-            throw new Error("Object cannot be created in this context");
-        };
-    }
-    return this.__output__;
-});
-
 var Event = function(options){
   if(options === undefined){
       options={target:window,currentTarget:window};
@@ -51,3 +37,4 @@ var Event = function(options){
   });
 };
 
+$w.Event = Event;

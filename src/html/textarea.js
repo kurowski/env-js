@@ -1,19 +1,14 @@
-$debug("Defining HTMLxElement");
+$debug("Defining HTMLTextAreaElement");
 /* 
-* HTMLxElement - DOM Level 2
+* HTMLTextAreaElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLxElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
-var HTMLxElement = function(ownerDocument) {
+var HTMLTextAreaElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
 };
-HTMLxElement.prototype = new HTMLElement;
-__extend__(HTMLxElement.prototype, {
+HTMLTextAreaElement.prototype = new HTMLElement;
+__extend__(HTMLTextAreaElement.prototype, {
+    //TODO
 });
 
-			
+$w.HTMLTextAreaElement = HTMLTextAreaElement;

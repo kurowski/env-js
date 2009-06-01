@@ -2,12 +2,6 @@ $debug("Defining HTMLOptionElement");
 /* 
 * HTMLOptionElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLOptionElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLOptionElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -68,4 +62,4 @@ __extend__(HTMLOptionElement.prototype, {
     }
 });
 
-			
+$w.HTMLOptionElement = HTMLOptionElement;

@@ -2,12 +2,6 @@ $debug("Defining DocumentFragment");
 /* 
 * DocumentFragment - DOM Level 2
 */
-$w.__defineGetter__("DocumentFragment", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 /**
  * @class  DOMDocumentFragment - DocumentFragment is a "lightweight" or "minimal" Document object.
  * @extends DOMNode
@@ -39,3 +33,5 @@ __extend__(DOMDocumentFragment.prototype,{
         return "DocumentFragment #"+this._id;
     }
 });
+
+$w.DocumentFragment = DOMDocumentFragment;

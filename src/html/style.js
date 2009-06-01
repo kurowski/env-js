@@ -2,12 +2,6 @@ $debug("Defining HTMLStyleElement");
 /* 
 * HTMLStyleElement - DOM Level 2
 */
-$w.__defineGetter__("HTMLStyleElement", function(){
-    return function(){
-        throw new Error("Object cannot be created in this context");
-    };
-});
-
 var HTMLStyleElement = function(ownerDocument) {
     this.HTMLElement = HTMLElement;
     this.HTMLElement(ownerDocument);
@@ -34,4 +28,4 @@ __extend__(HTMLStyleElement.prototype, {
     }
 });
 
-			
+$w.HTMLStyleElement = HTMLStyleElement;

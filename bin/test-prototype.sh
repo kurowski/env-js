@@ -25,8 +25,8 @@ ant concat
 if [ ! -d "$PROTOTYPE_DIR" ]; then
   git clone git://github.com/sstephenson/prototype.git $PROTOTYPE_DIR
   cd $PROTOTYPE_DIR
-  git submodule init
-  git submodule update
+  git submodule init #allow prototype to discover test framework dependencies
+  git submodule update #load the dicovered dependencies
   rake test:build #prepares tests
   cd -
 fi
